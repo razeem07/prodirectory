@@ -8,11 +8,15 @@
     <link rel="stylesheet" href="{% static 'css/style.css' %}">
 </head>
 <body>
+  
     <nav class="navbar">
-        <div class="nav-container">
-            <a href="{% url 'products:list' %}" class="nav-brand">📦 Product Directory</a>
+    <div class="nav-container">
+        <a href="{% url 'products:list' %}" class="nav-brand">📦 Product Directory</a>
+        <div class="nav-links">
+            <a href="{% url 'products:category_list' %}" class="btn btn-secondary">Categories</a>
             <a href="{% url 'products:add' %}" class="btn btn-primary">+ Add Product</a>
         </div>
+    </div>
     </nav>
 
     <main class="main-content">
