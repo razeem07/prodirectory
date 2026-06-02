@@ -1,0 +1,38 @@
+{% extends 'base.html' %}
+{% load static %}
+
+{% block title %}Products{% endblock %}
+
+{% block content %}
+<div class="page-header">
+    <h1>All Products</h1>
+    <p>{{ products|length }} products found</p>
+</div>
+
+<div class="product-grid">
+    {% for product in products %}
+    <div class="product-card">
+        {% if product.image %}
+            <img src="{{ product.image.url }}" alt="{{ product.name }}" class="product-image">
+        {% else %}
+            <div class="product-image-placeholder">📦</div>
+        {% endif %}
+        <div class="product-info">
+            <span class="product-category">{{ product.category }}</span>
+            <h3 class="product-name">{{ product.name }}</h3>
+            <p class="product-description">{{ product.description|truncatewords:15 }}</p>
+            <p class="product-price">${{ product.price }}</p>
+            <div class="product-actions">
+                <a href="{% url 'products:edit' product.pk %}" class="btn btn-secondary">Edit</a>
+                <a href="{% url 'products:delete' product.pk %}" class="btn btn-danger">Delete</a>
+            </div>
+        </div>
+    </div>
+    {% empty %}
+    <div class="empty-state">
+        <p>🛍 No products yet.</p>
+        <a href="{% url 'products:add' %}" class="btn btn-primary">Add your first product</a>
+    </div>
+    {% endfor %}
+</div>
+{% endblock %}
